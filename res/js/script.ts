@@ -4,6 +4,14 @@
 declare var fire;
 
 class TextEditor {
+
+    /**
+     * Setup of object.
+     */
+    constructor() {
+        document.execCommand("styleWithCSS", null, true);
+    }
+
     command(name : string, arg ?: string) {
         switch(name){
             case 'createLink':
@@ -33,8 +41,10 @@ class TextEditor {
     }
 }
 
+
 let editor : TextEditor = new TextEditor();
 fire.ready(function(){
+    let content = fire.get('.editor .content')[0];
     // Call Command.
     // Basic formatage.
     fire.get('.editor .button.bold').on('click', function(){
@@ -107,9 +117,35 @@ fire.ready(function(){
         editor.show_panel(this);
     });
 
-    // Toolkit.
+    // Toolkit Size.
+    fire.get('.editor .button.size + .toolkit').hide();
     fire.get('.editor .button.size').on('click', function(){
+        this.toggleClass('active');
         fire.get('.editor .button.size + .toolkit').toggle();
     });
-
+    fire.get('.editor .button.size + .toolkit input').on('input', function() {
+        this.next().element.innerText = this.val();
+        let selection = document.getSelection();
+        let begin_node : any = selection.anchorNode;
+        let end_node : any = selection.focusNode;
+        if (begin_node !== end_node || selection.anchorOffset !== selection.focusOffset) { // If there is a selection.
+            let id = Date.now();
+            if (begin_node.nodeName && begin_node.nodeName.toLowerCase() === 'span' && begin_node.childNodes.length === 1) {
+                begin_node.style['font-size'] = this.val() + 'px';
+                begin_node.setAttribute('data-restore', id);
+            } else {
+                let text : string = selection.toString();
+                text = text.replace(/\n/g, '<br/>');
+                editor.command('insertHTML', "<span data-restore='"+id+"' style='font-size:" + this.val() + "px'>" + text + '</span>');
+            }
+            // Get element and set selection on it.
+            let span = fire.get('.editor .content span[data-restore="'+id+'"]');
+            span = span[0];
+            let range = document.createRange();
+            range.selectNode(span.element);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+    });
 });
