@@ -1,6 +1,10 @@
 'use strict';
 var TextEditor = (function () {
+    /**
+     * Setup of object.
+     */
     function TextEditor() {
+        document.execCommand("styleWithCSS", null, true);
     }
     TextEditor.prototype.command = function (name, arg) {
         switch (name) {
@@ -32,6 +36,7 @@ var TextEditor = (function () {
 }());
 var editor = new TextEditor();
 fire.ready(function () {
+    var content = fire.get('.editor .content')[0];
     // Call Command.
     // Basic formatage.
     fire.get('.editor .button.bold').on('click', function () {
@@ -98,8 +103,36 @@ fire.ready(function () {
     fire.get('.group:last-child .button').on('click', function () {
         editor.show_panel(this);
     });
-    // Toolkit.
+    // Toolkit Size.
+    fire.get('.editor .button.size + .toolkit').hide();
     fire.get('.editor .button.size').on('click', function () {
+        this.toggleClass('active');
         fire.get('.editor .button.size + .toolkit').toggle();
+    });
+    fire.get('.editor .button.size + .toolkit input').on('input', function () {
+        this.next().element.innerText = this.val();
+        var selection = document.getSelection();
+        var begin_node = selection.anchorNode;
+        var end_node = selection.focusNode;
+        if (begin_node !== end_node || selection.anchorOffset !== selection.focusOffset) {
+            var id = Date.now();
+            if (begin_node.nodeName && begin_node.nodeName.toLowerCase() === 'span' && begin_node.childNodes.length === 1) {
+                begin_node.style['font-size'] = this.val() + 'px';
+                begin_node.setAttribute('data-restore', id);
+            }
+            else {
+                var text = selection.toString();
+                text = text.replace(/\n/g, '<br/>');
+                editor.command('insertHTML', "<span data-restore='" + id + "' style='font-size:" + this.val() + "px'>" + text + '</span>');
+            }
+            // Get element and set selection on it.
+            var span = fire.get('.editor .content span[data-restore="' + id + '"]');
+            span = span[0];
+            var range = document.createRange();
+            range.selectNode(span.element);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
     });
 });
