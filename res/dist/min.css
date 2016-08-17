@@ -5,10 +5,18 @@
 .editor .menu .group:last-child .button{display:none}.editor .menu .group:last-child .button.visible{display:block}
 .editor .menu .group .button{border:0;background-color:transparent;font-weight:bold;height:48px;width:48px;cursor:pointer;padding:12px;box-sizing:border-box;background-color:#FFF;position:relative;z-index:1}
 .editor .menu .group .button:hover svg{fill:#ff9800}.editor .menu .group .button.active{box-shadow:0 -1px 1px rgba(0,0,0,0.24);z-index:3}
-.editor .menu .group .toolkit{display:none;padding:8px;background-color:#FFF;position:absolute;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24)}
-.editor .menu .group .size+.toolkit{left:-10px;top:48px;display:flex;align-items:center}
-.editor .menu .group .size+.toolkit label{padding:0 4px}.editor .menu.visible{height:320px;padding:0}
-.editor .menu.visible .group{visibility:visible;position:relative;width:auto;height:48px;margin:0;padding:0;transition:visibility 0s linear .3s}
+.editor .menu .group .button.size+.toolkit{display:flex;align-items:center;left:-30px}
+.editor .menu .group .button.size+.toolkit label{padding:0 4px}.editor .menu .group .button.color+.toolkit{display:flex;left:0}
+.editor .menu .group .button.color+.toolkit .palette{display:flex;flex-direction:column}
+.editor .menu .group .button.color+.toolkit .palette button{width:30px;height:25px;cursor:pointer;margin:1px;border:0}
+.editor .menu .group .button.image+.toolkit{left:0;display:flex}.editor .menu .group .button.image+.toolkit div{position:relative;height:45px}
+.editor .menu .group .button.image+.toolkit div.upload_img{width:46px;border-right:1px solid #e8e8e8}
+.editor .menu .group .button.image+.toolkit div.upload_img button,.editor .menu .group .button.image+.toolkit div.upload_img input{position:absolute;width:45px;height:45px;top:0;left:0}
+.editor .menu .group .button.image+.toolkit div.upload_img input{opacity:0;cursor:pointer;z-index:2}
+.editor .menu .group .button.image+.toolkit div.upload_img input:hover+button svg{fill:#ff9800}
+.editor .menu .group .button.image+.toolkit div.cloud_img{display:flex;align-items:center;margin-left:16px}
+.editor .menu .group .button.image+.toolkit div.cloud_img input{height:20px}.editor .menu .group .toolkit{padding:8px;background-color:#FFF;position:absolute;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);top:48px}
+.editor .menu.visible{height:320px;padding:0}.editor .menu.visible .group{visibility:visible;position:relative;width:auto;height:48px;margin:0;padding:0;transition:visibility 0s linear .3s}
 .editor .body{background-color:#e8e8e8;padding:4px 4px 24px 4px;top:64px;position:relative}
 .editor .content{padding:8px;margin:auto;overflow:auto;min-height:400px;background-color:#FFF;width:100%;max-width:1200px;box-sizing:border-box}
 .editor .content a{color:#ff9800;cursor:pointer}.editor .content blockquote,.editor .content ul,.editor .content ol{margin-left:24px}
