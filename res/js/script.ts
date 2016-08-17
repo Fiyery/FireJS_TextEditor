@@ -20,12 +20,14 @@ class TextEditor {
                     return false;
                 }
                 break;
+            /*
             case 'insertImage':
                 arg = prompt("Quelle est l'adresse de l'image ?");
                 if (!arg) {
                     return false;
                 }
                 break;
+            */
         }
         if (typeof arg === 'undefined' || !arg) {
             arg = '';
@@ -45,6 +47,8 @@ class TextEditor {
 let editor : TextEditor = new TextEditor();
 fire.ready(function(){
     let content = fire.get('.editor .content')[0];
+    let global_range = null;
+
     // Call Command.
     // Basic formatage.
     fire.get('.editor .button.bold').on('click', function(){
@@ -109,19 +113,66 @@ fire.ready(function(){
     fire.get('.editor .button.link').on('click', function(){
         editor.command('createLink');
     });  
-    fire.get('.editor .button.image').on('click', function(){
-        editor.command('insertImage');
-    });
 
     fire.get('.group:last-child .button').on('click', function(){
         editor.show_panel(this);
     });
 
-    // Toolkit Size.
+    // Image Toolkit.
+    fire.get('.editor .button.image + .toolkit').hide();
+    fire.get('.editor .button.image').on('click', function(){
+        let show = (!this.hasClass('active'));
+        // Reset other toolkit.
+        fire.get('.editor .toolkit').hide();
+        fire.get('.editor .button').removeClass('active');
+        // Show toolkit.
+        if (show) {
+            this.addClass('active');
+            fire.get('.editor .button.image + .toolkit').show();
+        } else {
+            this.removeClass('active');
+        }
+        // Sauvegarde de la sélection.
+        global_range = document.getSelection().getRangeAt(0);
+    });
+    fire.get('.editor .button.image + .toolkit input[type="file"]').on('change', function(){
+        if (this.element.files && this.element.files[0]) {
+            let fr = new FileReader();
+            fr.onload = function(e : any) {
+                let sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(global_range);
+                editor.command('insertImage', e.target.result);
+                fire.get('.editor .button.image').removeClass('active');
+                fire.get('.editor .button.image + .toolkit').hide();
+            };       
+            fr.readAsDataURL( this.element.files[0]);
+        }
+    });
+    fire.get('.editor .button.image + .toolkit input[type="text"] + button').on('click', function(){
+        let sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(global_range);
+        editor.command('insertImage', this.prev().val());
+        fire.get('.editor .button.image').removeClass('active');
+        fire.get('.editor .button.image + .toolkit').hide();
+    });
+
+
+    // Size Toolkit.
     fire.get('.editor .button.size + .toolkit').hide();
     fire.get('.editor .button.size').on('click', function(){
-        this.toggleClass('active');
-        fire.get('.editor .button.size + .toolkit').toggle();
+        let show = (!this.hasClass('active'));
+        // Reset other toolkit.
+        fire.get('.editor .toolkit').hide();
+        fire.get('.editor .button').removeClass('active');
+        // Show toolkit.
+        if (show) {
+            this.addClass('active');
+            fire.get('.editor .button.size + .toolkit').show();
+        } else {
+            this.removeClass('active');
+        }
     });
     fire.get('.editor .button.size + .toolkit input').on('input', function() {
         this.next().element.innerText = this.val();
@@ -130,22 +181,77 @@ fire.ready(function(){
         let end_node : any = selection.focusNode;
         if (begin_node !== end_node || selection.anchorOffset !== selection.focusOffset) { // If there is a selection.
             let id = Date.now();
+            if (begin_node.nodeName.toLowerCase() === '#text' && begin_node.parentNode.nodeName.toLowerCase() === 'span' && begin_node.parentNode.childNodes.length === 1) {
+                begin_node = begin_node.parentElement;
+            }
             if (begin_node.nodeName && begin_node.nodeName.toLowerCase() === 'span' && begin_node.childNodes.length === 1) {
                 begin_node.style['font-size'] = this.val() + 'px';
-                begin_node.setAttribute('data-restore', id);
+                begin_node.setAttribute('data-id', id);
             } else {
                 let text : string = selection.toString();
                 text = text.replace(/\n/g, '<br/>');
-                editor.command('insertHTML', "<span data-restore='"+id+"' style='font-size:" + this.val() + "px'>" + text + '</span>');
+                editor.command('insertHTML', "<span data-id='"+id+"' style='font-size:" + this.val() + "px'>" + text + '</span>');
             }
             // Get element and set selection on it.
-            let span = fire.get('.editor .content span[data-restore="'+id+'"]');
+            let span = fire.get('.editor .content span[data-id="'+id+'"]');
             span = span[0];
+            span.set('data-id', null);
             let range = document.createRange();
-            range.selectNode(span.element);
-            var sel = window.getSelection();
+            range.selectNode(span.element.childNodes[0]);
+            let sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
+        }
+    });
+
+    // Color Toolkit.
+    fire.get('.editor .button.color + .toolkit').hide();
+    fire.get('.editor .button.color').on('click', function(){
+        let show = (!this.hasClass('active'));
+        // Reset other toolkit.
+        fire.get('.editor .toolkit').hide();
+        fire.get('.editor .button').removeClass('active');
+        // Show toolkit.
+        if (show) {
+            this.addClass('active');
+            fire.get('.editor .button.color + .toolkit').show();
+            let div = fire.get('.editor .button.color + .toolkit .palette button');
+            for (let i = 0; i < div.length; i++) {
+                let d = div[i];
+                d.element.style.backgroundColor = d.get('data-color');
+            }
+        } else {
+            this.removeClass('active');
+        }
+    });
+    fire.get('.editor .button.color + .toolkit .palette button').on('click', function(){
+        let selection = document.getSelection();
+        let begin_node : any = selection.anchorNode;
+        let end_node : any = selection.focusNode;
+        if (begin_node !== end_node || selection.anchorOffset !== selection.focusOffset) { // If there is a selection.
+            let id = Date.now();
+            if (begin_node.nodeName.toLowerCase() === '#text' && begin_node.parentNode.nodeName.toLowerCase() === 'span' && begin_node.parentNode.childNodes.length === 1) {
+                begin_node = begin_node.parentElement;
+            }
+            if (begin_node.nodeName && begin_node.nodeName.toLowerCase() === 'span' && begin_node.childNodes.length === 1) {
+                begin_node.style['color'] = this.get('data-color');
+                begin_node.setAttribute('data-id', id);
+            } else {
+                let text : string = selection.toString();
+                text = text.replace(/\n/g, '<br/>');
+                editor.command('insertHTML', "<span data-id='"+id+"' style='color:" + this.get('data-color')+"'>" + text + '</span>');
+            }
+            // Get element and set selection on it.
+            let span = fire.get('.editor .content span[data-id="'+id+'"]');
+            span = span[0];
+            span.set('data-id', null);
+            let range = document.createRange();
+            range.selectNode(span.element);
+            let sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            fire.get('.editor .button.color').toggleClass('active');
+            fire.get('.editor .button.color + .toolkit').toggle();
         }
     });
 });
