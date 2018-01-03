@@ -13,7 +13,7 @@ header('Content-type: text/html; charset=utf-8');
     <body>
         <div class='editor'>
             <div class='menu'>
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                 	<!-- Bold -->
                 	<button class='button bold' title='Gras'>
                 		<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                     <!-- Color -->
                     <button class='button color' title='Couleur'>
 	                    <svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -321,7 +321,7 @@ header('Content-type: text/html; charset=utf-8');
 	                </button>
                 </div>
 
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                 	<!-- Align left -->
                 	<button class='button justifyleft' title='Aligné à gauche'>
 	                	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -367,7 +367,7 @@ header('Content-type: text/html; charset=utf-8');
                     </button>
                 </div>
 
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                 	<!-- Header 1 -->
                 	<button class='button h1'  title='Titre 1'>
 	                	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -397,7 +397,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                 	<!-- List point  -->
                 	<button class='button unorderedlist' title='Liste de point'>
                 		<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -413,7 +413,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group'>
+                <div class='group mode_wysiwyg'>
                     <!-- Link -->
                     <button class='button link'  title='Lien'>
                     	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -507,8 +507,9 @@ header('Content-type: text/html; charset=utf-8');
 						<img src='res/img/smileys/049.gif' data-code='' title=''/>
 					</div>
                 </div>
-				<!-- Code -->
+				
                 <div class='group'>
+					<!-- Code -->
                     <button class='button code'  title='Edition HTML'>
                     	<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 						    <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -534,7 +535,11 @@ header('Content-type: text/html; charset=utf-8');
                 </div>
             </div>
             <div class='body'>
-                <div class="content" contentEditable="true" ></div>
+				<div class="bloc_content">
+					<div class="content" contentEditable="true" ></div>
+					<textarea class="content hide" ></textarea>
+				</div>
+				<div class="save_info"></div>
             </div>
         </div>
     </body>
