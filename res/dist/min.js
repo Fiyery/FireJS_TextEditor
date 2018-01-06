@@ -152,10 +152,6 @@ var TextEditor = function () {
                 _loop2(i);
             }
 
-            fire.get(".group .button.extend_panel").on("click", function () {
-                that.show_panel(this);
-            });
-
             // Image Toolkit.
             that.editor.find(".button.image + .toolkit").hide();
             that.editor.find(".button.image").on("click", function () {
