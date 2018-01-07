@@ -49,7 +49,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.editor.find("textarea.content").val("");
 
             // If there is a save, it's loaded.
-            this.editor.find("div.content").html(localStorage.getItem("editor_save"));
+            if (this.editor.find("input[name='load_content']").val() == 1) {
+                this.editor.find("div.content").html(localStorage.getItem("editor_save"));
+            }
 
             this.handle_event();
 

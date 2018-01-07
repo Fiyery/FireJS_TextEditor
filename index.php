@@ -12,6 +12,7 @@ header('Content-type: text/html; charset=utf-8');
     </head>
     <body>
         <div class='editor'>
+			<input type="hidden" name="load_content" value="0"/>
 			<input type="hidden" name="wysiwyg" value="1"/>
             <div class='menu'>
                 <div class='group_command mode_wysiwyg'>
