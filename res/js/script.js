@@ -251,7 +251,7 @@
                 if (s < 10) {
                     s = "0" + s;
                 }
-                let d = date.getDay();
+                let d = date.getDate();
                 if (d < 10) {
                     d = "0" + d;
                 }
@@ -260,7 +260,7 @@
                     m = "0" + m;
                 }
                 let y = date.getFullYear();
-                this.editor.find(".save_info").html("Dernière sauvegarde : "+d+"/"+m+"/"+y+" à "+h+":"+m+":"+s);
+                this.editor.find(".save_info").html("Dernière sauvegarde : "+d+"/"+m+"/"+y+" à "+h+":"+i+":"+s);
             }, 10000);
         }
     }
