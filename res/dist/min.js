@@ -274,7 +274,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     if (s < 10) {
                         s = "0" + s;
                     }
-                    var d = date.getDay();
+                    var d = date.getDate();
                     if (d < 10) {
                         d = "0" + d;
                     }
@@ -283,7 +283,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         m = "0" + m;
                     }
                     var y = date.getFullYear();
-                    _this.editor.find(".save_info").html("Dernière sauvegarde : " + d + "/" + m + "/" + y + " à " + h + ":" + m + ":" + s);
+                    _this.editor.find(".save_info").html("Dernière sauvegarde : " + d + "/" + m + "/" + y + " à " + h + ":" + i + ":" + s);
                 }, 10000);
             }
         }]);
