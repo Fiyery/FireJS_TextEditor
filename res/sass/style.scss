@@ -1,89 +1,89 @@
-*
+body 
 {
-    font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
 }
 
 .editor 
 {
+    font-family: 'Roboto', sans-serif;
+
 	.menu
 	{
 	    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	    background-color: #FFF;
-	    height: 64px;
-	    position: absolute;
+	    min-height: 64px;
 	    z-index: 2;
 	    padding: 0 8px 0 8px;
 	    display: flex;
 	    align-items: center;
-	    flex-wrap: wrap;
-	    left: 0;
-	    top: 0;
-	    right: 0;
-	    transition: all .3s ease-in-out;
+        flex-wrap: wrap;
+        transition: all .3s ease-in-out;
+        
+        &.visible
+        {
+            height: 320px;
+            padding: 0;
+
+            .group_command
+            {
+                visibility: visible;
+                width: auto;
+                height: 48px;
+                margin: 0;
+                padding: 0;
+                transition: visibility 0s linear 0.3s;
+            }
+        }
 	   
-    	> .button, .group:not(:last-child)
+    	> .button, .group_command:not(:last-child)
 		{
 		    margin-right: 4px;
 		}
 		
-		.group
+		.group_command
 		{
 			height: 48px;
 		    padding-right: 4px;
 		    display: flex;
-		    align-items: center;
-		    
-		    &:nth-child(2),
-			&:nth-child(3),
-			&:nth-child(4),
-			&:nth-child(5),
-			&:nth-child(6),
-			&:nth-child(7)
+            align-items: center;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            position: relative;
+
+            margin-left: 0;
+            min-width: 0;
+            max-width: none;
+            
+			&:not(:last-child)
 			{
-			    visibility: hidden;
-			    width: 0;
-			    height: 0;
-			    position: absolute;
-                border-right: 1px solid #E8E8E8;
-			}
-		
-			&:last-child
-			{
-			    flex: 2 0 0;
-			    display: flex;
-			    justify-content: flex-end;
-			    
-			    .button
-				{
-				    display: none;
-				    
-				    &.visible
-					{
-					    display: block;
-					}
-				}
-			}
+			    border-right: 1px solid #E8E8E8;
+            }
+
+            &.mode_wysiwyg.disabled .button svg
+            {
+                fill: #CACACA;
+            }
+
+            &.group:not(.disabled) .button:hover svg
+            {
+                fill: #FF9800;
+            }
+
 
             .button
             {
-                border: 0px;
+                border: 0;
+                margin: 0;
                 background-color: transparent;
                 font-weight: bold;
                 height: 48px;
                 width: 48px;
-                cursor: pointer;
                 padding: 12px;
                 box-sizing: border-box;
-                background-color: #FFF;
                 position: relative;
                 z-index: 1;
-                
-                &:hover svg
-                {
-                    fill: #FF9800;
-                }
+                cursor: pointer;
 
                 &.active
                 {
@@ -126,7 +126,7 @@
 
                 &.image + .toolkit 
                 {
-                    left: 0px;
+                    left: -198px;
                     display: flex;
 
                     div 
@@ -174,8 +174,33 @@
                         } 
                     }
                 }
+
+                &.emoticone + .toolkit 
+                {
+                    display: flex;
+                    margin-left: -130px;
+                    min-width: 200px;
+                    max-width: 300px;
+                    flex-wrap: wrap;
+
+                    img 
+                    {
+                        cursor: pointer;
+                        margin: 2px;
+                    }
+                }
             }
 
+            input 
+            {
+                margin: 0;
+                padding: 0;
+                font-size: 1rem;
+                width: auto;
+                border: 0;
+            }
+
+            
             .toolkit 
             {
                 padding: 8px;
@@ -186,53 +211,64 @@
                 top: 48px;
             }
 		}
-
-        &.visible
-        {
-            height: 320px;
-            padding: 0;
-
-            .group
-            {
-                visibility: visible;
-                position: relative;
-                width: auto;
-                height: 48px;
-                margin: 0;
-                padding: 0;
-                transition: visibility 0s linear 0.3s;
-            }
-        }
 	}
 
     .body
     {
         background-color: #E8E8E8;
         padding: 4px 4px 24px 4px;
-        top: 64px;;
-        position: relative;
-    }
 
-    .content
-    {
-        padding: 8px;
-        margin: auto;
-        overflow: auto;
-        min-height: 400px;
-        background-color: #FFF;
-        width: 100%;
-        max-width: 1200px;
-        box-sizing: border-box;
-
-        a
+        .save_info
         {
-            color: #FF9800; 
-            cursor: pointer;
+            padding: 2px 8px;
+            float: right;
+            font-size: 80%;
         }
 
-        blockquote, ul, ol
+        .bloc_content
         {
-            margin-left: 24px;
+            min-height: 400px;
+            max-width: 1200px;
+            overflow-x: hidden; 
+            resize: vertical;
+            margin: auto;
+            position: relative;
+    
+            .content
+            {
+                margin: 0;
+                border: 0;
+                padding: 8px;
+                overflow: auto;
+                background-color: #FFF;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                display: block;
+                resize: none;
+                
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: all ease-in-out .4s;
+        
+                &.hide
+                {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+        
+                a
+                {
+                    color: #FF9800; 
+                    cursor: pointer;
+                }
+        
+                blockquote, ul, ol
+                {
+                    margin-left: 24px;
+                }
+            }
         }
     }
 }
@@ -257,7 +293,7 @@
     
         .menu 
         {
-            .group 
+            .group_command
             {
                 &:nth-child(2)
                 {
@@ -280,95 +316,6 @@
         }
     }
 }
-
-@media all and (min-width: 520px)
-{
-    .editor .menu.visible
-    {
-        height: 192px;
-    }
-}
-
-@media all and (min-width: 695px)
-{
-    .editor .menu.visible
-    {
-        height: 128px;
-    }
-}
-
-@media all and (min-width: 760px)
-{
-    .editor .menu .group:nth-child(3)
-    {
-        visibility: visible;
-        position: relative;
-        width: auto;
-        height: 48px;
-    }
-}
-
-@media all and (min-width: 975px)
-{
-    .editor .menu .group:nth-child(4)
-    {
-        visibility: visible;
-        position: relative;
-        width: auto;
-        height: 48px;
-    }
-}
-
-@media all and (min-width: 1085px)
-{
-    .editor .menu .group:nth-child(5)
-    {
-        visibility: visible;
-        position: relative;
-        width: auto;
-        height: 48px;
-    }
-}
-
-@media screen and (min-width: 1250px)
-{
-    .editor
-    {
-        .body
-        {
-            padding: 24px;
-        }
-
-        .menu
-        {
-            &.visible
-            {
-                height: 64px;
-            }
-
-            .group
-            {
-                &:nth-child(6), &:nth-child(7)
-                {
-                    visibility: visible;
-                    position: relative;
-                    width: auto;
-                    height: 48px;
-                }
-
-                &:last-child
-                {
-                    visibility: hidden;
-                    position: absolute;
-                    margin: 0;
-                    height: 0;
-                }
-            }
-        }
-    }
-}
-
-
 
 input[type=range]::-moz-range-track 
 {

@@ -1,33 +1,33 @@
-*{font-family:'Roboto',sans-serif;padding:0;margin:0}.editor .menu{box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);background-color:#FFF;height:64px;position:absolute;z-index:2;padding:0 8px 0 8px;display:flex;align-items:center;flex-wrap:wrap;left:0;top:0;right:0;transition:all .3s ease-in-out}
-.editor .menu>.button,.editor .menu .group:not(:last-child){margin-right:4px}.editor .menu .group{height:48px;padding-right:4px;display:flex;align-items:center}
-.editor .menu .group:nth-child(2),.editor .menu .group:nth-child(3),.editor .menu .group:nth-child(4),.editor .menu .group:nth-child(5),.editor .menu .group:nth-child(6),.editor .menu .group:nth-child(7){visibility:hidden;width:0;height:0;position:absolute;border-right:1px solid #e8e8e8}
-.editor .menu .group:last-child{flex:2 0 0;display:flex;justify-content:flex-end}
-.editor .menu .group:last-child .button{display:none}.editor .menu .group:last-child .button.visible{display:block}
-.editor .menu .group .button{border:0;background-color:transparent;font-weight:bold;height:48px;width:48px;cursor:pointer;padding:12px;box-sizing:border-box;background-color:#FFF;position:relative;z-index:1}
-.editor .menu .group .button:hover svg{fill:#ff9800}.editor .menu .group .button.active{box-shadow:0 -1px 1px rgba(0,0,0,0.24);z-index:3}
-.editor .menu .group .button.size+.toolkit{display:flex;align-items:center;left:-30px}
-.editor .menu .group .button.size+.toolkit label{padding:0 4px}.editor .menu .group .button.color+.toolkit{display:flex;left:0}
-.editor .menu .group .button.color+.toolkit .palette{display:flex;flex-direction:column}
-.editor .menu .group .button.color+.toolkit .palette button{width:30px;height:25px;cursor:pointer;margin:1px;border:0}
-.editor .menu .group .button.image+.toolkit{left:0;display:flex}.editor .menu .group .button.image+.toolkit div{position:relative;height:45px}
-.editor .menu .group .button.image+.toolkit div.upload_img{width:46px;border-right:1px solid #e8e8e8}
-.editor .menu .group .button.image+.toolkit div.upload_img button,.editor .menu .group .button.image+.toolkit div.upload_img input{position:absolute;width:45px;height:45px;top:0;left:0}
-.editor .menu .group .button.image+.toolkit div.upload_img input{opacity:0;cursor:pointer;z-index:2}
-.editor .menu .group .button.image+.toolkit div.upload_img input:hover+button svg{fill:#ff9800}
-.editor .menu .group .button.image+.toolkit div.cloud_img{display:flex;align-items:center;margin-left:16px}
-.editor .menu .group .button.image+.toolkit div.cloud_img input{height:20px}.editor .menu .group .toolkit{padding:8px;background-color:#FFF;position:absolute;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);top:48px}
-.editor .menu.visible{height:320px;padding:0}.editor .menu.visible .group{visibility:visible;position:relative;width:auto;height:48px;margin:0;padding:0;transition:visibility 0s linear .3s}
-.editor .body{background-color:#e8e8e8;padding:4px 4px 24px 4px;top:64px;position:relative}
-.editor .content{padding:8px;margin:auto;overflow:auto;min-height:400px;background-color:#FFF;width:100%;max-width:1200px;box-sizing:border-box}
-.editor .content a{color:#ff9800;cursor:pointer}.editor .content blockquote,.editor .content ul,.editor .content ol{margin-left:24px}
+body{padding:0;margin:0}.editor{font-family:'Roboto',sans-serif}
+.editor .menu{box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);background-color:#FFF;min-height:64px;z-index:2;padding:0 8px 0 8px;display:flex;align-items:center;flex-wrap:wrap;transition:all .3s ease-in-out}
+.editor .menu.visible{height:320px;padding:0}.editor .menu.visible .group_command{visibility:visible;width:auto;height:48px;margin:0;padding:0;transition:visibility 0s linear .3s}
+.editor .menu>.button,.editor .menu .group_command:not(:last-child){margin-right:4px}
+.editor .menu .group_command{height:48px;padding-right:4px;display:flex;align-items:center;margin-top:8px;margin-bottom:8px;position:relative;margin-left:0;min-width:0;max-width:none}
+.editor .menu .group_command:not(:last-child){border-right:1px solid #e8e8e8}.editor .menu .group_command.mode_wysiwyg.disabled .button svg{fill:#cacaca}
+.editor .menu .group_command.group:not(.disabled) .button:hover svg{fill:#ff9800}
+.editor .menu .group_command .button{border:0;margin:0;background-color:transparent;font-weight:bold;height:48px;width:48px;padding:12px;box-sizing:border-box;position:relative;z-index:1;cursor:pointer}
+.editor .menu .group_command .button.active{box-shadow:0 -1px 1px rgba(0,0,0,0.24);z-index:3}
+.editor .menu .group_command .button.size+.toolkit{display:flex;align-items:center;left:-30px}
+.editor .menu .group_command .button.size+.toolkit label{padding:0 4px}.editor .menu .group_command .button.color+.toolkit{display:flex;left:0}
+.editor .menu .group_command .button.color+.toolkit .palette{display:flex;flex-direction:column}
+.editor .menu .group_command .button.color+.toolkit .palette button{width:30px;height:25px;cursor:pointer;margin:1px;border:0}
+.editor .menu .group_command .button.image+.toolkit{left:-198px;display:flex}.editor .menu .group_command .button.image+.toolkit div{position:relative;height:45px}
+.editor .menu .group_command .button.image+.toolkit div.upload_img{width:46px;border-right:1px solid #e8e8e8}
+.editor .menu .group_command .button.image+.toolkit div.upload_img button,.editor .menu .group_command .button.image+.toolkit div.upload_img input{position:absolute;width:45px;height:45px;top:0;left:0}
+.editor .menu .group_command .button.image+.toolkit div.upload_img input{opacity:0;cursor:pointer;z-index:2}
+.editor .menu .group_command .button.image+.toolkit div.upload_img input:hover+button svg{fill:#ff9800}
+.editor .menu .group_command .button.image+.toolkit div.cloud_img{display:flex;align-items:center;margin-left:16px}
+.editor .menu .group_command .button.image+.toolkit div.cloud_img input{height:20px}
+.editor .menu .group_command .button.emoticone+.toolkit{display:flex;margin-left:-130px;min-width:200px;max-width:300px;flex-wrap:wrap}
+.editor .menu .group_command .button.emoticone+.toolkit img{cursor:pointer;margin:2px}
+.editor .menu .group_command input{margin:0;padding:0;font-size:1rem;width:auto;border:0}
+.editor .menu .group_command .toolkit{padding:8px;background-color:#FFF;position:absolute;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);top:48px}
+.editor .body{background-color:#e8e8e8;padding:4px 4px 24px 4px}.editor .body .save_info{padding:2px 8px;float:right;font-size:80%}
+.editor .body .bloc_content{min-height:400px;max-width:1200px;overflow-x:hidden;resize:vertical;margin:auto;position:relative}
+.editor .body .bloc_content .content{margin:0;border:0;padding:8px;overflow:auto;background-color:#FFF;width:100%;height:100%;box-sizing:border-box;display:block;resize:none;position:absolute;top:0;left:0;transition:all ease-in-out .4s}
+.editor .body .bloc_content .content.hide{opacity:0;visibility:hidden}.editor .body .bloc_content .content a{color:#ff9800;cursor:pointer}
+.editor .body .bloc_content .content blockquote,.editor .body .bloc_content .content ul,.editor .body .bloc_content .content ol{margin-left:24px}
 @media all and (min-width:360px){.editor .menu.visible{height:256px;padding:0 8px 0 8px}
-}@media all and (min-width:450px){.editor .body{padding:8px 8px 24px 8px}.editor .menu .group:nth-child(2){visibility:visible;position:relative;width:auto;height:48px}
-.editor .menu .group:not(:last-child){margin-right:4px}.editor .menu .group:not(:last-child),.editor .menu .group:last-child{padding-right:4px}
-}@media all and (min-width:520px){.editor .menu.visible{height:192px}}@media all and (min-width:695px){.editor .menu.visible{height:128px}
-}@media all and (min-width:760px){.editor .menu .group:nth-child(3){visibility:visible;position:relative;width:auto;height:48px}
-}@media all and (min-width:975px){.editor .menu .group:nth-child(4){visibility:visible;position:relative;width:auto;height:48px}
-}@media all and (min-width:1085px){.editor .menu .group:nth-child(5){visibility:visible;position:relative;width:auto;height:48px}
-}@media screen and (min-width:1250px){.editor .body{padding:24px}.editor .menu.visible{height:64px}
-.editor .menu .group:nth-child(6),.editor .menu .group:nth-child(7){visibility:visible;position:relative;width:auto;height:48px}
-.editor .menu .group:last-child{visibility:hidden;position:absolute;margin:0;height:0}
+}@media all and (min-width:450px){.editor .body{padding:8px 8px 24px 8px}.editor .menu .group_command:nth-child(2){visibility:visible;position:relative;width:auto;height:48px}
+.editor .menu .group_command:not(:last-child){margin-right:4px}.editor .menu .group_command:not(:last-child),.editor .menu .group_command:last-child{padding-right:4px}
 }input[type=range]::-moz-range-track{background:#444}input[type=range]:active::-moz-range-track{background:orange}
