@@ -12,8 +12,9 @@ header('Content-type: text/html; charset=utf-8');
     </head>
     <body>
         <div class='editor'>
+			<input type="hidden" name="wysiwyg" value="1"/>
             <div class='menu'>
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                 	<!-- Bold -->
                 	<button class='button bold' title='Gras'>
                 		<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -44,7 +45,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                     <!-- Color -->
                     <button class='button color' title='Couleur'>
 	                    <svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -321,7 +322,7 @@ header('Content-type: text/html; charset=utf-8');
 	                </button>
                 </div>
 
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                 	<!-- Align left -->
                 	<button class='button justifyleft' title='Aligné à gauche'>
 	                	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -367,7 +368,7 @@ header('Content-type: text/html; charset=utf-8');
                     </button>
                 </div>
 
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                 	<!-- Header 1 -->
                 	<button class='button h1'  title='Titre 1'>
 	                	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -397,7 +398,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                 	<!-- List point  -->
                 	<button class='button unorderedlist' title='Liste de point'>
                 		<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -413,7 +414,7 @@ header('Content-type: text/html; charset=utf-8');
                 	</button>
                 </div>
 
-                <div class='group mode_wysiwyg'>
+                <div class='group_command mode_wysiwyg'>
                     <!-- Link -->
                     <button class='button link'  title='Lien'>
                     	<svg fill="#444" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -539,7 +540,7 @@ header('Content-type: text/html; charset=utf-8');
 					</div>
                 </div>
 				
-                <div class='group'>
+                <div class='group_command'>
 					<!-- Code -->
                     <button class='button code'  title='Edition HTML'>
                     	<svg fill="#444" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
