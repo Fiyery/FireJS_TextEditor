@@ -123,6 +123,7 @@
                     if (!this.parent().hasClass("disabled")) {
                         that.command(that.commands[name]);
                     }
+                    return false;
                 });
             }
 
@@ -131,6 +132,7 @@
                     if (!this.parent().hasClass("disabled")) {
                         that.command("formatBlock", "<h"+i+">");
                     }
+                    return false;
                 });
             }
 
@@ -143,6 +145,7 @@
                     // Sauvegarde de la sélection.
                     that.global_range = document.getSelection().getRangeAt(0);
                 }
+                return false;
             });
 
             // Insert image from computer (file to base64).
@@ -169,6 +172,7 @@
                 that.command("insertImage", this.prev().val());
                 that.editor.find(".button.image").removeClass("active");
                 that.editor.find(".button.image + .toolkit").hide();
+                return false;
             });
 
 
@@ -178,6 +182,7 @@
                 if (!this.parent().hasClass("disabled")) {
                     that.toggle_toolkit(this, "size");
                 }
+                return false;
             });
             that.editor.find(".button.size + .toolkit input").on("input", function() {
                 this.next().element.innerText = this.val();
@@ -196,12 +201,14 @@
                         }
                     }
                 }
+                return false;
             });
 
             that.editor.find(".button.color + .toolkit .palette button").on("click", function(){
                 that.span_command("color", this.get("data-color"));
                 that.editor.find(".button.color").toggleClass("active");
                 that.editor.find(".button.color + .toolkit").toggle();
+                return false;
             });
 
             // Smiley toolkit.
@@ -210,9 +217,11 @@
                 if (!this.parent().hasClass("disabled")) {
                     that.toggle_toolkit(this, "emoticone");
                 }
+                return false;
             });
             that.editor.find(".button.emoticone + .toolkit img").on("click", function(){
                 that.command("insertImage", this.get("src"));
+                return false;
             });
 
             // HTML Editing.
@@ -222,14 +231,17 @@
                 if (that.mode_wysiwyg) {
                     textarea.val(div.html());
                     that.editor.find("input[name='wysiwyg']").val(0);
+                    div.html("");
                 } else {
                     div.html(textarea.val());
                     that.editor.find("input[name='wysiwyg']").val(1);
+                    textarea.val("");
                 }
                 that.mode_wysiwyg = !that.mode_wysiwyg;
                 that.editor.find(".mode_wysiwyg").toggleClass("disabled");
                 div.toggleClass("hide");
                 textarea.toggleClass("hide");
+                return false;
             });
         }
 
